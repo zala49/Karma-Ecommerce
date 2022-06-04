@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block body_content %}
+
+<div class='container'>
+    <div class="row fullscreen align-items-center justify-content-center">
+        <div class="col-lg-6">
+            <div class="register_form_inner">
+                <h1>Add Your Address Here!!</h1> 
+                    <form class="row login_form" method="post"  novalidate="novalidate">
+                        {% csrf_token %}
+                        {{form.as_p}}    
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" {% url 'cartview' %} class="primary-btn">Add Address</button><br>
+                        </div>
+                    </div>
+                    </form>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body_content %}

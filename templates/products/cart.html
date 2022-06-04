@@ -1,0 +1,97 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block body_content %}
+
+<!--================Cart Area =================-->
+<br><br>
+<section class="cart_area">
+    <div class="container">
+        {% for data in  product_item %}
+        
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <img src="{{data.product.image.url}}" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>${{data.product.discount_price}}</h5>
+                            </td>
+                            <td>
+                            <input type="text" name="qty" id="sst" maxlength="12" value="{{data.quantity}}" title="Quantity:" class="input-text qty">
+                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                            class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                            class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                            </td>
+                            <td>
+                                <h5>${{data.get_total}}</h5>
+                            </td>
+                        </tr>
+                        
+                        {% endfor %}
+                        <tr class="out_button_area">
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <div class="checkout_btn_inner d-flex align-items-center">
+                                    <a class="primary-btn" href="{% url 'address' %}">Add Address</a>
+                                    <a class="gray_btn" href="#">Continue Shopping</a>
+                                    <a class="primary-btn" href="{% url 'checkout' %}">Proceed to checkout</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!--================End Cart Area =================-->
+{% endblock body_content %}
+{% block end_script %}
+    <script>
+        function add_to_cart(product_id){
+            console.log(product_id)
+            console.log("Add to cart Button Cliked")
+            var quantity = $("#sst").val()
+            $.ajax({
+                url : "{% url 'add_to_cart_url' %}",
+                type: "POST",
+                data : {
+                    'quantity': quantity,
+                    'product_id': product_id,
+                },
+                headers: {'X-CSRFToken': "{{csrf_token}}"},
+                success:function(response){
+                    console.log(response['quantity']);
+                }  
+            })
+        }
+    </script>
+{% endblock end_script%}
