@@ -8,6 +8,9 @@ Login Page
 Home Page
 
 ![Screenshot (94)](https://user-images.githubusercontent.com/87110945/172017391-8048e961-cc25-4c46-8b7a-fddb90dca4b7.png)
+
+Footer 
+
 ![Screenshot (95)](https://user-images.githubusercontent.com/87110945/172017396-f1ade7c2-5bec-4be3-b86d-b023298ef013.png)
 
 About Page
